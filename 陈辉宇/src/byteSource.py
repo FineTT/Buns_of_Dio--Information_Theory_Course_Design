@@ -86,6 +86,17 @@ def outputResToFile(outputFileName, msg):
             ofn.write(i.to_bytes(1, 'big'))
 
 
+def get_msg(P0, msgLength):
+    Ext = ganExtend(P0)
+
+    # 初始化一个numpy的数组用于存放用户输入文件读出的的概率分布
+    symbol_prob = zeros(256)
+    symbol_prob[:] = Ext
+
+    # 获得生成的符合条件的数据的数组，并将其转换成列表，便于输出到二进制文件中
+    msg = getInfoSouece(symbol_prob, msgLength).tolist()
+    return msg
+
 def main(argv):
     '''处理所有函数
 
@@ -94,15 +105,12 @@ def main(argv):
     # 得到数据比特概率分布，目标文件路径以及信息源长度
     if len(argv) == 4:
         P0 = float(argv[1])
-        outputFileName = argv[2]
-        msgLength = int(argv[3])
+        msgLength = int(argv[2])
+        outputFileName = argv[3]
     else:
         return
 
     Ext = ganExtend(P0)
-
-    # 得到指定字节符号的概率分布
-    # data = handleFileData(Ext)
 
     # 初始化一个numpy的数组用于存放用户输入文件读出的的概率分布
     symbol_prob = zeros(256)

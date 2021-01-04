@@ -1,0 +1,2 @@
+"X","Y","H(X)","H(Y)","I(X;Y)"
+"unit-test\P0=0.5.LEN=1MB.OUTPUT.dat","unit-test\p=0.5.P0=0.5.LEN=1MB.Channel_OUTPUT.dat","0.9999787134580429","0.9999806172542656","0.005674237918067537"

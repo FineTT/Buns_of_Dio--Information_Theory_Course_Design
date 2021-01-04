@@ -19,7 +19,7 @@ from sys import argv
 
 
 def decode_repeat(BS_decode, BDRT, method='-a'):
-    ''' 
+    '''
     重复码解码，兼有解码文件头功能
 
     Args:
@@ -60,7 +60,7 @@ def decode_repeat(BS_decode, BDRT, method='-a'):
 
 
 def decode_linear(C_decode, j):
-    ''' 
+    '''
     线性分组码解码
 
     Args:
@@ -119,9 +119,9 @@ def decode_linear(C_decode, j):
 
 
 def linear_correct(BS_info_mat, pos, n):
-    ''' 
+    '''
     线性分组码解码
-    
+
     Args:
         BS_info_mat (array): 信息组
         pos (liat): 误码位置
@@ -136,7 +136,7 @@ def linear_correct(BS_info_mat, pos, n):
 
 
 def gen_header(headers):
-    ''' 
+    '''
     获取文件头信息
 
     Args:
@@ -285,7 +285,10 @@ def main(argv):
         return
 
     # 将解码后的信息流写入指定文件中
-    R = BitStream(bin=R_str[0:source_length+2])
+    if method == 0 or (method == 1 and factor == 3):
+        R = BitStream(bin=R_str[0:source_length + 2])
+    else:
+        R = BitStream(bin=R_str[0:source_length])
     IO(OUTPUT, method='O', data=R)
 
 if __name__ == "__main__":

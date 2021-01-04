@@ -1,0 +1,7 @@
+file before encoding,file after encoding,file after decoding,Bit Error Rate,Information Transfer Efficiency of Source,Information Transfer Efficiency of Channel,Compression Ratio
+unit-test\P0=0.5.LEN=1MB.OUTPUT.dat,unit-test\P0=0.5.LEN=1MB.N=5.reENCode.dat,unit-test\P0=0.5.LEN=1MB.N=5.reDECode.dat,0,1,0.2,0.199999313
+unit-test\P0=0.5.LEN=1MB.OUTPUT.dat,unit-test\P0=0.5.LEN=1MB.N=7.reENCode.dat,unit-test\P0=0.5.LEN=1MB.N=7.reDECode.dat,0,1,0.142857143,0.142856793
+unit-test\P0=0.5.LEN=1MB.OUTPUT.dat,unit-test\P0=0.5.LEN=1MB.N=9.reENCode.dat,unit-test\P0=0.5.LEN=1MB.N=9.reDECode.dat,0,1,0.111111111,0.111110899
+"unit-test\P0=0.5.LEN=1MB.OUTPUT.dat","unit-test\P0=0.5.LEN=1MB.7_4.lineENCode.dat","unit-test\P0=0.5.LEN=1MB.7_4.lineDECode.dat","0.0","1.0","0.5714285714285714","0.5714229662141027"
+"unit-test\P0=0.5.LEN=1MB.OUTPUT.dat","unit-test\P0=0.5.LEN=1MB.15_11.lineENCode.dat","unit-test\P0=0.5.LEN=1MB.15_11.lineDECode.dat","0.0","1.0","0.7333333333333333","0.7333237755219789"
+"unit-test\P0=0.5.LEN=1MB.OUTPUT.dat","unit-test\P0=0.5.LEN=1MB.31_26.lineENCode.dat","unit-test\P0=0.5.LEN=1MB.31_26.lineDECode.dat","0.0","1.0","0.8387096774193549","0.8386964155025615"

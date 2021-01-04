@@ -17,7 +17,7 @@ from sys import argv
 from numpy import dot, array, hstack
 
 def encode_repeat(BS_encode, n):
-    ''' 
+    '''
     重复码编码
 
     Args:
@@ -27,7 +27,7 @@ def encode_repeat(BS_encode, n):
         BS_encode_repetition (bitstream): 编码后的比特流
     '''
     # 判断是否是规定的重复码的码字长度
-    if (n in (3, 5, 7)) == False:
+    if (n in (3, 5, 7, 9)) == False:
         return
 
     # 转成二进制便于编码
@@ -40,7 +40,7 @@ def encode_repeat(BS_encode, n):
     return BS_encode_repetition
 
 def encode_linear(BS_encode, j):
-    ''' 
+    '''
     线性分组码编码
 
     Args:
@@ -70,7 +70,7 @@ def encode_linear(BS_encode, j):
     elif j == 5:
         BS_bin_arr = addZero(BS_bin_arr, 26)
         BS_mat = BS_bin_arr.reshape(-1, 1).reshape(-1, 26)
-    
+
     # 矩阵相乘相加，得到编码后的数组
     C = dot(BS_mat, G).ravel() % 2
     C = addZero(C, 8)
@@ -95,7 +95,7 @@ def IO(PATH, method='I', data=None):
     def O(PATH, data):
         with open(PATH, 'wb') as ofs:
             data.tofile(ofs)
-    
+
     if method=='I':
         return I(PATH)
     elif method=='O':
@@ -208,7 +208,7 @@ def genG(j):
 def addZero(arr, n):
     '''
     根据需要在数组后面补足 0
-    
+
     Args：
         arr (array): 指定的数组
         n (int): 需要添加的最长长度
@@ -242,7 +242,7 @@ def main(argv):
         M = 1
     else:
         return
-    
+
     C_final = gen_header(M, factor, BS_len, C)
 
     # 将编码后的比特流输出到指定路径中

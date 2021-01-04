@@ -28,14 +28,14 @@ def IO(PATH, method='I', data=None):
         i = 0
         for header in data[0]:
             csvbook[header] = data[1][i]
-            i += 1   
+            i += 1
 
         # 用 pandas 的 DataFrame 方法处理输出数据
         dataframe = DataFrame(csvbook)
 
         # 将输出数据写入指定文件中
         dataframe.to_csv(PATH, sep=',')
-            
+
     if method == 'I':
         return I(PATH)
     elif method == 'O':
@@ -80,7 +80,7 @@ def genEntropy(P0):
 
     # 获得二元DSM的信源冗余度
     Imax = log2(1 / 0.5)
-    R = I / Imax
+    R = 1- (I / Imax)
 
     return I, R
 
@@ -94,7 +94,7 @@ def outputResToFile(PATH, P, P0, I, R):
         I (float): 二元DMS的信息熵（信息比特/二元消息）
         R (float): 二元DSM的信源冗余度
     '''
-    
+
     # 字典的键，备用
     headers = ['P(n)', 'P0', 'H(x)', 'redundancy']
 

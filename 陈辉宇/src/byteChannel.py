@@ -3,9 +3,9 @@ __email__ = "chy126101@gmail.com"
 __version__ = "20201230.1532"
 
 from sys import argv
+from byteSource import get_msg
 
-
-def handleFileData(inputFileName, noiseFileName):
+def handleFileData(inputFileName, P):
     '''打开二进制文件(.csv)，处理数据
 
     读入用户输入的二进制文件的数据，将数据按列逐个写入一个列表中并返回
@@ -20,8 +20,7 @@ def handleFileData(inputFileName, noiseFileName):
     with open(inputFileName, 'rb') as inp:
         inputData = inp.read()
 
-    with open(noiseFileName, 'rb') as noi:
-        noiseData = noi.read()
+    noiseData = get_msg(P, len(inputData))
         
     return inputData, noiseData
 
@@ -67,11 +66,11 @@ def outputResToFile(outputFileName, outputData):
 def main(argv):
     # 参数列表: 分别为输入文件路径、噪声文件路径以及输出文件路径
     inputFileName = argv[1]
-    noiseFileName = argv[2]
+    P = float(argv[2])
     outputFileName = argv[3]
 
     # 处理用户输入
-    inputData, noiseData = handleFileData(inputFileName, noiseFileName)
+    inputData, noiseData = handleFileData(inputFileName, P)
 
     # 输入文件数据进入指定错误概率的有噪信道
     outputData = byteChannel(inputData, noiseData)

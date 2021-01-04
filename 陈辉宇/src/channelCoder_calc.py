@@ -36,11 +36,11 @@ def gen_Rs(method, factor):
         R_after = log2(2) / factor
     elif method == 1:
         if factor == 3:
-            R_after = log2(2) / 7
+            R_after = 4 * log2(2) / 7
         elif factor == 4:
-            R_after = log2(2) / 15
+            R_after = 11 * log2(2) / 15
         elif factor == 5:
-            R_after = log2(2) / 31
+            R_after = 26 * log2(2) / 31
         else:
             return
     else:
