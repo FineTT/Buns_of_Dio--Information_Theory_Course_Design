@@ -6,14 +6,14 @@
 - Basic usage
 
 ```help
-  byteSource.exe P0 OUTPUT msgLength 
+  byteSource.exe P0 msgLength OUTPUT 
   P0                 信源消息概率分布
-  OUTPUT             输出文件路径
   msgLength          消息序列的长度 
+  OUTPUT             输出文件路径
 ```
 
 > For example:
->     `byteSource.exe 0.5 "data/output.dat" 1024`
+>     `byteSource.exe 0.5 1024 "data/output.dat"`
 
 - Its calculation model `byteSource_calc.exe`
 ```help
@@ -29,14 +29,14 @@
 - Basic usage
 
 ```help
-  byteChannel.exe INPUT NOISE OUTPUT
+  byteChannel.exe INPUT P OUTPUT
   INPUT              输入文件路径
-  NOISE              噪声文件路径
+  P                  错误传递概率
   OUTPUT             输出文件路径
 ```
 
 > For example:
->     `byteChannel.exe "data/input.dat" "data/noise.dat" "data/output.dat"`
+>     `byteChannel.exe "data/input.dat" P "data/output.dat"`
 
 - Its calculation model `byteSource_calc.exe`
 ```help
@@ -55,11 +55,11 @@
 - Basic usage
 
 ```help
-  channelEncoder.exe method INPUT NOISE factor
-  method             解码方式: 0 为重复码, 1 为线性分组码
+  channelEncoder.exe method INPUT OUTPUT factor
+  method             解码方式: -r 为重复码, -l 为线性分组码
   INPUT              输入文件路径
   OUTPUT             输出文件路径
-  factor             重复码的码字长度(3, 5, 7) 或 线性分组码的奇偶校验长度(3, 4, 5)
+  factor             重复码的码字长度(5, 7, 9) 或 线性分组码的奇偶校验长度(3, 4, 5)
 ```
 
 > For example:
