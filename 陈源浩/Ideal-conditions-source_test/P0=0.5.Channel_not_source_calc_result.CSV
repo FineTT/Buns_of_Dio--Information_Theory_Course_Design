@@ -1,0 +1,2 @@
+X,Y,H(X),H(Y),I(X;Y)
+test\P0=0.5.LEN=10KB.test.dat,test\p-error=0.P0=0.5.LEN=10KB.Channel_OUTPUT.dat,0.9999,0.9999,0.9999
