@@ -49,8 +49,48 @@
 > For example:
 >    `byteChannel_calc.exe "data/ChannelInput.dat" "data/ChannelOutput.dat" "data/output.csv"`
 
-3. 霍夫曼编码，按上面的格式补充一下
+3.  `byteSourceEncoder.exe` & `byteSourceDecoder.exe`
+- Basic usage
+```help
+  byteSourceEncoder.exe PMF INPUT OUTPUT
+  PMF      是一个CSV（逗号分隔值）文件，给定数值0-256的概率分布，格式如下：
+	         它包含256行数据，第0行表示符号“0”，第255行表示符号“255”。
+	         每行有两个逗号分隔的值：<symbol>，<probability>。
+	         例如：
+	         0,0.1
+	         1,0.3
+	         2,0.0
+	         3,0.2
+	         4,0.4
+	         5,0
+	         ...
+	         255,0
+  INPUT    由byteSource按给定的PMF生成
+  OUTPUT   编码后的文件输出路径
+```
 
+> For example:
+>     `byteSourceEncoder.exe "..\unit-test\pmf.byte.p0=0.1.csv" "..\unit-test\source.p0=0.1.len=32KB.dat" "..\_encoded_pmf.p0=0.1_source.p0=0.1.len=32KB.tmp"`
+
+```
+  help
+  byteSourceDecoder.exe INPUT OUTPUT
+  INPUT    编码后的文件，格式与encode中的OUTPUT文件一致
+  OUTPUT   解码后的文件，原则上应与encode中的INPUT文件一致  
+```
+
+> For example:
+>     `byteSourceDecoder.exe "..\_encoded_pmf.p0=0.1_source.p0=0.1.len=32KB.tmp" "..\_decoded_pmf.p0=0.1_source.p0=0.1.len=32KB.tmp"`
+
+```help
+  codding_effect.exe INPUT1 INPUT2 OUTPUT 
+  INPUT1             输入编码前文件路径
+  INPUT2             输入编码后文件路径
+  OUTPUT             指标计算后CSV文件
+```
+
+> For example:
+>    `codding_effect.exe "data/FileBeforeEncoding.dat" "data/FileAfterEncoding.dat" "data/output.csv"`
 4. `channelEncoder.exe` & `channelDecoder.exe`
 - Basic usage
 
