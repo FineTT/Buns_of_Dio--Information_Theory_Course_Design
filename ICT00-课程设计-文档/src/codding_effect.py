@@ -8,7 +8,7 @@ def H_s(BS):
         根据用户输入的文件计算编码前文件信息熵和编码后文件信息熵
         Args:
             BS (BitStream): 文件的比特流
-        
+
         Returns:
             H(BS1)编码前文件的信息熵    (信息比特/字节)
             H(BS2)编码后文件的信息熵    (信息比特/字节)
@@ -42,7 +42,7 @@ def l(in_file_name,P0):
         根据用户输入的文件计算平均码长
         Args:
             in_file_name(string): 输入文件
-     
+
         Returns:
             l(float)平均码长           (码字数据比特/信源字节)
     '''
@@ -61,7 +61,7 @@ def l(in_file_name,P0):
     symbol_count = header.read(1)[0]
     # 获取 source_len，位于header第四位，以反序读取后转为int
     source_len = int.from_bytes(header.read(4), byteorder)
-    # 将编码放入字典 codebook 中
+    # 读取码书信息
     len_code=0
     for k in range(symbol_count+1):
         # 读取符号
@@ -72,16 +72,14 @@ def l(in_file_name,P0):
         word_bytes = int(ceil(word_len / 8))
         # 码字
         word = int.from_bytes(header.read(word_bytes), byteorder)
-        # 将码字长度、码字存入字典codebook中
-        codebook[symbol] = (word_len, word)
-        c=bin(symbol)[2:].rjust(8,'0')
-        
+        c=bin(symbol)[2:].rjust(8,'0')              #这里将码书的符号转换为8位二进制位
+
         cou = 0
-        for b in range(len(c)):
+        for b in range(len(c)):         #由于码书符号对应的是编码前的码书符号，所以这里用编码前给定的概率P0反算每一个码书符号的概率
             if c[b]=='0':
                 cou=cou+1
-        len_code = len_code+word_len*pow(P0,cou)*pow(1-P0,8-cou)
-        
+        len_code = len_code+word_len*pow(P0,cou)*pow(1-P0,8-cou)  #用对应的码书符号概率乘以这个码书符号所对应的编码后码字长度，即可得到平均码长
+
     return len_code
 
 def coding_efficiency(Hs,L):
@@ -90,7 +88,7 @@ def coding_efficiency(Hs,L):
         Args:
             BS1 (BitStream): 文件1的比特流
             BS2 (BitStream): 文件2的比特流
-       
+
         Returns:
             effict(float)编码效率
     '''
@@ -108,7 +106,7 @@ def main(argv):
 
     BS1 = BitStream(filename=INPUT1)
     BS2 = BitStream(filename=INPUT2)
-    
+
 
     H_before,P0_before = H_s(BS1)
     H_after,P0_after = H_s(BS2)
@@ -118,6 +116,8 @@ def main(argv):
 
     with open(RESULT, 'a') as of:
         f_csv = writer(of)
+        f_csv.writerow(['编码前的文件', '编码前的文件的信息熵(信息比特/字节)', '编码后的文件',
+                        '编码后的文件的信息熵(信息比特/字节)', '压缩比', '平均码长', '编码效率'])
         f_csv.writerow([INPUT1,str(H_before), INPUT2, str(H_after),str(channel_ratio),str(BS2_LEN),str(cod)])
 
 if __name__ == '__main__':
